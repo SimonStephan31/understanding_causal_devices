@@ -228,7 +228,7 @@ bar.delta.noChange.novel <- bar.delta.noChange.novel+
   guides(fill=guide_legend(direction="vertical",title.hjust=.5,ncol=2,byrow=TRUE))+
   scale_fill_manual(values=c("#000000","#555555","#999999","#FFFFFF"),name="Predicted Effect",labels=c("size side/same color","size side/other color","weight side/other color","weight side/same color"))
 #ggsave("known_dev_novel_obj.svg",width=5,height=7)
-#ggsave("known_dev_novel_obj.pdf",width=5,height=7)
+ggsave("known_dev_novel_obj.pdf",width=5,height=7)
 bar.delta.noChange.novel
 
 # novel device, known objects (C)
@@ -272,7 +272,7 @@ bar.delta.change.known <- bar.delta.change.known+
   guides(fill=guide_legend(direction="vertical",title.hjust=.5,ncol=2,byrow=TRUE))+
   scale_fill_manual(values=c("#000000","#555555","#999999","#FFFFFF"),name="Predicted Effect",labels=c("same side/same color","same side/other color","other side/other color","other side/same color"))
 #ggsave("novel_dev_known_obj.svg",width=5,height=7)
-#ggsave("novel_dev_known_obj.pdf",width=5,height=7)
+ggsave("novel_dev_known_obj.pdf",width=5,height=7)
 bar.delta.change.known
 
 # novel device, novel objects (D)
@@ -316,7 +316,7 @@ bar.delta.change.novel <- bar.delta.change.novel+
   guides(fill=guide_legend(direction="vertical",title.hjust=.5,ncol=2,byrow=TRUE))+
   scale_fill_manual(values=c("#000000","#555555","#999999","#FFFFFF"),name="Predicted Effect",labels=c("size side/same color","size side/other color","weight side/other color","weight side/same color"))
 #ggsave("novel_dev_novel_obj.svg",width=5,height=7)
-#ggsave("novel_dev_novel_obj.pdf",width=5,height=7)
+ggsave("novel_dev_novel_obj.pdf",width=5,height=7)
 bar.delta.change.novel
 
 ```
