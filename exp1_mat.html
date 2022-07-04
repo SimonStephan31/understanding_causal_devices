@@ -13,12 +13,22 @@
 
 <title>Experiment 1</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -40,11 +50,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -57,32 +62,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
@@ -94,10 +74,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -114,40 +90,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 66px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h2 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h3 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h4 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h5 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
-.section h6 {
-  padding-top: 71px;
-  margin-top: -71px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -175,7 +127,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -187,7 +139,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -198,10 +150,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -213,7 +178,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -339,7 +303,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -353,7 +317,7 @@ div.tocify {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -364,13 +328,13 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fas fa-home"></span>
+    <span class="fa fa-home"></span>
      
     Home
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="glyphicon glyphicon-book"></span>
      
     Experimental materials and data
@@ -397,7 +361,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -418,53 +382,70 @@ body {
 <p><br></p>
 <p><img src="images/exp1_illu.PNG" /></p>
 <p><br></p>
-<div id="experimental-materials" class="section level1">
-<h1><span class="header-section-number">1</span> Experimental Materials</h1>
+<div id="experimental-materials" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Experimental
+Materials</h1>
 <ul>
-<li><a href="Exp_1/materials.zip">Download (Zip-folder) experimental materials</a></li>
+<li><a href="Exp_1/materials.zip">Download (Zip-folder) experimental
+materials</a></li>
 <li>The Zip-folder contains:
 <ul>
-<li>the animation files (both source and compiled files; the animations were built in Adobe Flash)</li>
+<li>the animation files (both source and compiled files; the animations
+were built in Adobe Flash)</li>
 <li>the experimental instructions (print version of the study)</li>
 </ul></li>
 </ul>
 <hr />
 </div>
-<div id="demo-clip" class="section level1">
+<div id="demo-clip" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Demo clip</h1>
-<p><video src="Exp_1/materials/01_demo_clip.mp4" style="width:100.0%" controls=""><a href="Exp_1/materials/01_demo_clip.mp4">Video</a></video></p>
+<p><video src="Exp_1/materials/01_demo_clip.mp4" style="width:100.0%"
+controls=""><a
+href="Exp_1/materials/01_demo_clip.mp4">Video</a></video></p>
 <hr />
 </div>
-<div id="data-and-analyses-scripts" class="section level1">
-<h1><span class="header-section-number">3</span> Data and Analyses Scripts</h1>
+<div id="data-and-analyses-scripts" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Data and Analyses
+Scripts</h1>
 <ul>
-<li><a href="Exp_1/data_and_analyses.zip">Download (Zip-file) experimental data and analyses scripts</a></li>
+<li><a href="Exp_1/data_and_analyses.zip">Download (Zip-file)
+experimental data and analyses scripts</a></li>
 <li>The Zip-folder contains:
 <ul>
-<li>two .txt files (tab delim) with the experimental data (see description below)</li>
+<li>two .txt files (tab delim) with the experimental data (see
+description below)</li>
 <li>a .RMD file which is the R-Markdown analysis code</li>
-<li>a .html file with is the knitted/ compiled version of the analysis script</li>
+<li>a .html file with is the knitted/ compiled version of the analysis
+script</li>
+<li>a screenshot of our G-Power sensitivity analysis</li>
 </ul></li>
 </ul>
-<div id="data-set-information" class="section level2">
-<h2><span class="header-section-number">3.1</span> Data set information</h2>
-<p>The .txt file “01_sdata.txt” contains subject information. The different columns are:</p>
+<div id="data-set-information" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Data set
+information</h2>
+<p>The .txt file “01_sdata.txt” contains subject information. The
+different columns are:</p>
 <ul>
 <li>“sID”,“sex”,“age”,“duration”,“cond”,“dispcode”, where
 <ul>
 <li><strong>sID</strong>: subject identifier</li>
 <li><strong>sex</strong>: subjects’ sex (1 = male, 2 = female)</li>
 <li><strong>age</strong>: subjects’ age in years</li>
-<li><strong>duration</strong>: the time subjects took to complete the task (in seconds)</li>
-<li><strong>cond</strong>: numeric variable coding the different conditions</li>
-<li><strong>dispcode</strong>: a disposition code indicating that the study ran correctly</li>
+<li><strong>duration</strong>: the time subjects took to complete the
+task (in seconds)</li>
+<li><strong>cond</strong>: numeric variable coding the different
+conditions</li>
+<li><strong>dispcode</strong>: a disposition code indicating that the
+study ran correctly</li>
 </ul></li>
 </ul>
-<p>The .txt file “01_tdata.txt” contains the main data (i.e., subjects’ responses). The different columns are:</p>
+<p>The .txt file “01_tdata.txt” contains the main data (i.e., subjects’
+responses). The different columns are:</p>
 <ul>
 <li>“sID”,“cond”,“variable”,“value”, where
 <ul>
-<li><strong>sID</strong>: subject identifier (same as in 01_sdata.txt)</li>
+<li><strong>sID</strong>: subject identifier (same as in
+01_sdata.txt)</li>
 <li><strong>variable</strong>: a condition code</li>
 <li><strong>value</strong>: subjects’ response</li>
 </ul></li>
@@ -472,11 +453,13 @@ body {
 <hr />
 </div>
 </div>
-<div id="analysis-script" class="section level1">
+<div id="analysis-script" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Analysis Script</h1>
 <ul>
-<li><a href="Exp_1/data_and_analyses/Exp1_Analysis.Rmd">R-Markdown code</a></li>
-<li><a href="Exp_1/data_and_analyses/Exp1_Analysis.html">View knitted/ compiled R-Markdown</a> (web view of analysis)</li>
+<li><a href="Exp_1/data_and_analyses/Exp1_Analysis.Rmd">R-Markdown
+code</a></li>
+<li><a href="Exp_1/data_and_analyses/Exp1_Analysis.html">View knitted/
+compiled R-Markdown</a> (web view of analysis)</li>
 </ul>
 </div>
 
@@ -510,7 +493,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -519,6 +502,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

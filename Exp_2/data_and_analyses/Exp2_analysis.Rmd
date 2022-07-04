@@ -407,6 +407,63 @@ ttest.vs0<-ttest.vs0[,c(5:7,3,1,2,4)]
 ttest.vs0
 ```
 
+Convert d values to r values (for the biggest and smallest effect):
+
+The conversion was done using the formula by Borenstein et al. (2009), see: https://cran.r-project.org/web/packages/effectsize/vignettes/convert.html
+
+
+
+```{r}
+# function for the conversion
+d_to_r<-function(d){
+  r <- d/(sqrt(d^2+4))
+  return(r)
+}
+```
+
+
+```{r}
+# for largest effect
+d_to_r(2.245)
+```
+
+
+```{r}
+# now get the CI 
+library(metan) 
+corr_ci(   
+  r = 0.7466749,
+  n = 30,
+  verbose = TRUE
+)
+
+0.7466749 - 0.2269 # lower boundary 
+0.7466749 + 0.2269 # upper boundary 
+
+```
+
+```{r}
+# for largest effect
+d_to_r(0.795)
+```
+
+
+```{r}
+# now get the CI 
+library(metan) 
+corr_ci(   
+  r = 0.3693871,
+  n = 32,
+  verbose = TRUE
+)
+
+0.3693871 - 0.2962 # lower boundary 
+0.3693871 + 0.2962 # upper boundary 
+
+```
+
+
+
 ## ANOVA of specificity of delta-P increase across inference tasks
 ```{r}
 # ANOVA of specificity of delta-P increase across inference tasks

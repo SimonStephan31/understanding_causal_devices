@@ -222,8 +222,44 @@ wilc.vs0.5$n<-by(data$value,data[,2],length)
 wilc.vs0.5$n<-as.numeric(wilc.vs0.5$n)
 wilc.vs0.5$r<-rFromWilcox(wilc.vs0.5$p.value,wilc.vs0.5$n)
 wilc.vs0.5$condition<-c("Control","Size","Weight")
-wilc.vs0.5<-wilc.vs0.5[,c(5,3,1,2,4)]
+(wilc.vs0.5<-wilc.vs0.5[,c(5,3,1,2,4)])
 ```
+
+Get the CIs for the r values:
+
+- Condition: Size
+
+```{r}
+#devtools::install_github("TiagoOlivoto/metan")
+library(metan) 
+corr_ci(   
+  r = 0.7097688,
+  n = 36,
+  verbose = TRUE
+)
+
+#Computes the half-width confidence interval for correlation coefficient using the nonparametric method proposed by Olivoto et al. (2018). see: https://rdrr.io/cran/metan/man/corr_ci.html
+
+
+0.7097688 - 0.2132 # lower boundary 
+0.7097688 + 0.2132 # upper boundary 
+
+```
+- Condition: Weight
+
+```{r}
+corr_ci(   
+  r = 0.6701814,
+  n = 34,
+  verbose = TRUE
+)
+
+0.6701814 - 0.2264
+0.6701814 + 0.2264
+```
+
+
+
 
 ## test of effect of counterbalancing cause-effect associations within control condition
 ```{r}

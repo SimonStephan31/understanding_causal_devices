@@ -160,6 +160,7 @@ names(data.complete)[37:48] <- c("choice_identical_heavy","choice_identical_ligh
 
 # write.table(data.complete, file="data_complete.txt", append=TRUE, sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
 ```
+
 # Graphs
 
 ## Proportions
